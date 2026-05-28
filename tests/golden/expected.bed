@@ -1,0 +1,9 @@
+chr1	99	149	read1/1	60	+
+chr1	199	249	read1/2	60	-
+chr1	299	349	read2/1	60	+
+chr1	399	449	read2/2	60	-
+chr1	499	549	read4/1	60	+
+chr2	99	149	read4/2	60	-
+chr1	599	649	read5	30	+
+chr1	699	749	read6	60	+
+chr1	799	849	read7	60	+
