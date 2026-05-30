@@ -1,24 +1,4 @@
-//! Convert BAM alignments to BED6 format.
-//!
-//! ## Algorithm
-//!
-//! For each mapped alignment, emit one BED6 record:
-//! `chrom  start  end  name  score  strand`
-//!
-//! - `start` is 0-based (BED convention), sourced directly from the BAM `pos`
-//!   field which is also 0-based.
-//! - `end` = start + reference span of the alignment.
-//! - `score` is the mapping quality (MAPQ) unless `use_edit_distance` is set,
-//!   in which case the NM auxiliary tag value is used.
-//! - `strand` is `+` for forward, `-` for reverse-complemented reads.
-//!
-//! With `split`, any spliced alignment (containing N CIGAR operations) is
-//! broken into individual exon blocks — one BED record per block. The name and
-//! score come from the read; blocks are non-overlapping and non-adjacent.
-//!
-//! Unmapped reads (FLAG & 0x4) are always skipped.
-//!
-//! ## Reference
+//! BAM → BED6 conversion (bedtools bamtobed equivalent).
 //!
 //! `BEDTools` bamtobed — Quinlan & Hall (2010). Bioinformatics 26(6): 841–842.
 //! DOI: 10.1093/bioinformatics/btq033
@@ -56,7 +36,6 @@ pub struct BamToBedOpts {
     pub cigar: bool,
 }
 
-/// A single BED record (reusable, reduces per-record allocation).
 struct Bed6<'a> {
     chrom: &'a str,
     start: u64,

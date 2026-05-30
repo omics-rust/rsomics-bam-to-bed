@@ -12,11 +12,6 @@ pub const META: ToolMeta = ToolMeta {
     version: env!("CARGO_PKG_VERSION"),
 };
 
-/// Convert BAM alignments to BED6 format.
-///
-/// Reads a BAM file and emits one BED6 line per mapped alignment:
-/// chrom, start (0-based), end, name, score (MAPQ), strand.
-/// Unmapped reads are skipped.
 #[derive(Parser, Debug)]
 #[command(name = "rsomics-bam-to-bed", disable_help_flag = true)]
 pub struct Cli {
